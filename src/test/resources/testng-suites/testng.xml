@@ -6,6 +6,7 @@
             <class name="com.saucedemo.tests.ProjectSanity">
                 <methods>
                     <include name="sanity_test"/>
+                    <include name="login"/>
                 </methods>
             </class>
         </classes>
