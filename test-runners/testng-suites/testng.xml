@@ -9,6 +9,7 @@
                     <include name="login"/>
                 </methods>
             </class>
+            <class name="com.saucedemo.tests.LoginTests"></class>
         </classes>
     </test>
 </suite>
