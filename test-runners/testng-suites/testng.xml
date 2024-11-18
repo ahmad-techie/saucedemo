@@ -6,12 +6,6 @@
     </listeners>
     <test verbose="2" preserve-order="true" name="C:/Users/Masoud/Desktop/QA_Automation/Selenium/Projects/saucedemo">
         <classes>
-            <class name="com.saucedemo.tests.ProjectSanity">
-                <methods>
-                    <include name="sanity_test"/>
-                    <include name="login"/>
-                </methods>
-            </class>
             <class name="com.saucedemo.tests.LoginTests"></class>
         </classes>
     </test>

@@ -4,26 +4,27 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Duration;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TestUtils {
-    public static void takeScreenshot(WebDriver driver, String fileName) {
-        File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile, new File("test-output/screenshots/regression-tests" + fileName + ".png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-    public static void waitForVisibility(WebDriver driver, WebElement element, int timeout) {
-        new WebDriverWait(driver, Duration.ofSeconds(timeout))
-                .until(ExpectedConditions.visibilityOf(element));
+    private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+
+    public String takeScreenshot(WebDriver driver) throws IOException {
+        // Create a timestamped filename
+        String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String filePath =  "./testOutput/screenshots/screenshot_" + timestamp + ".png";
+
+        // Take screenshot and save to file
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(screenshot, new File(filePath));
+        logger.debug("Screenshot saved to: {}", filePath);
+        return filePath;
     }
 }

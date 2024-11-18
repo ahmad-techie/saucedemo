@@ -34,7 +34,7 @@ public class TestListener extends BaseTest implements ITestListener {
     public void onTestFailure(ITestResult result) {
         getTest().fail("Test Failed: " + result.getThrowable().getMessage());
         try {
-            getTest().addScreenCaptureFromPath(takeScreenshot(), result.getTestName());
+            getTest().addScreenCaptureFromPath(takeScreenshot(driver), result.getTestName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
