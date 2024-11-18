@@ -11,14 +11,19 @@ public class LoginTests extends BaseTest {
 
     private final String VALID_USERNAME = ConfigReader.get("username");
     private final String VALID_PASSWORD = ConfigReader.get("password");
+    private final String INVALID_USERNAME = "fake@123";
+    private final String INVALID_PASSWORD = "invalid_pass";
 
     @Test
     public void testValidLogin() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterUsername(VALID_USERNAME);
-        loginPage.enterPassword(VALID_PASSWORD);
-        InventoryPage inventoryPage = loginPage.clickLogin();
-
+        InventoryPage inventoryPage = loginPage.loginWith(VALID_USERNAME, VALID_PASSWORD);
         Assert.assertTrue(inventoryPage.isLoginSuccessful(), "Login was not successful");
     }
+
+    @Test
+    public void testInvalidLogin() {
+        loginPage.loginWith(INVALID_USERNAME, INVALID_PASSWORD);
+        Assert.assertTrue(loginPage.isPasswordMismatchMessagePresent());
+    }
+
 }

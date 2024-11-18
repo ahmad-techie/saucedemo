@@ -8,21 +8,22 @@ public class LoginPage extends BasePage {
     @FindBy(id = "user-name") private WebElement usernameField;
     @FindBy(id = "password") private WebElement passwordField;
     @FindBy(id = "login-button") private WebElement loginButton;
+    @FindBy(tagName = "h3") private WebElement errorMessage;
 
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
-    public void enterUsername(String username) {
+    public InventoryPage loginWith(String username, String password){
         enterText(usernameField, username);
-    }
-
-    public void enterPassword(String password) {
         enterText(passwordField, password);
-    }
-
-    public InventoryPage clickLogin() {
         click(loginButton);
         return new InventoryPage(driver);
     }
+
+    public boolean isPasswordMismatchMessagePresent(){
+        return errorMessage.getText().contains("password do not match");
+    }
+
+
 }

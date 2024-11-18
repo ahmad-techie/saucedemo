@@ -1,6 +1,7 @@
 package com.saucedemo.testBase;
 
 import com.saucedemo.config.Constants;
+import com.saucedemo.pages.LoginPage;
 import com.saucedemo.util.TestUtils;
 import com.saucedemo.utils.DriverManager;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,7 @@ public class BaseTest extends TestUtils {
     protected final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     protected WebDriver driver;
+    protected LoginPage loginPage;
 
     @BeforeMethod
     public void setUp() {
@@ -23,6 +25,7 @@ public class BaseTest extends TestUtils {
         driver = DriverManager.getDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get(Constants.BASE_URL);
+        loginPage = new LoginPage(driver);
         logger.debug("********** setup method executed ***********\n");
 
     }
