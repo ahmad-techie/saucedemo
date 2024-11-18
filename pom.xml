@@ -79,6 +79,12 @@
             <suiteXmlFiles>
               <suiteXmlFile>test-runners/testng-suites/testng.xml</suiteXmlFile> <!-- Adjust path if needed -->
             </suiteXmlFiles>
+            <testFailureIgnore> false </testFailureIgnore>
+            <runOrder>alphabetical</runOrder>
+            <useSystemClassLoader>false</useSystemClassLoader>
+            <forkCount>1</forkCount>
+            <reuseForks>false</reuseForks>
+            <argLine>-Dfile.encoding=UTF-8</argLine>
           </configuration>
         </plugin>
 
