@@ -7,6 +7,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 
 public class DriverManager {
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
@@ -31,7 +33,9 @@ public class DriverManager {
             driver.set(createEdgeDriver(isHeadless));
         } else if (browser.equals(Browsers.CHROME)) {
             driver.set(createChromeDriver(isHeadless));
-        } else {
+        } else if (browser.equals(Browsers.SAFARI)) {
+            driver.set(createSafariDriver());
+        }else {
             throw new IllegalArgumentException("Unsupported browser type: " + browser);
         }
     }
@@ -58,6 +62,10 @@ public class DriverManager {
             options.addArguments("headless");
         }
         return new ChromeDriver(options);
+    }
+
+    private static WebDriver createSafariDriver() {
+        return new SafariDriver();
     }
 
 //    private static void initializeDriver() {
