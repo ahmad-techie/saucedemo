@@ -8,19 +8,14 @@ import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTest {
 
-    private final String VALID_USERNAME = ConfigReader.get("username");
-    private final String VALID_PASSWORD = ConfigReader.get("password");
-    private final String INVALID_USERNAME = "fake@123";
-    private final String INVALID_PASSWORD = "invalid_pass";
-
     @Test
-    public void testValidLogin() {
+    public void verifyLoginWithValidCredentials() {
         InventoryPage inventoryPage = loginPage.loginWith(VALID_USERNAME, VALID_PASSWORD);
         Assert.assertTrue(inventoryPage.isLoginSuccessful(), "Login was not successful");
     }
 
     @Test
-    public void testInvalidLogin() {
+    public void verifyLoginWithInValidCredentials() {
         loginPage.loginWith(INVALID_USERNAME, INVALID_PASSWORD);
         Assert.assertTrue(loginPage.isPasswordMismatchMessagePresent());
     }

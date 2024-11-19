@@ -6,7 +6,8 @@
     </listeners>
     <test verbose="2" preserve-order="true" name="C:/Users/Masoud/Desktop/QA_Automation/Selenium/Projects/saucedemo">
         <classes>
-            <class name="com.saucedemo.tests.LoginTests"></class>
+            <class name="com.saucedemo.tests.LoginTests"/>
+            <class name="com.saucedemo.tests.InventoryTest"/>
         </classes>
     </test>
 </suite>

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-public class BasePage {
+public abstract class BasePage {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
@@ -31,6 +31,14 @@ public class BasePage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(Constants.TIMEOUT));
+    }
+
+    protected void customWait(int seconds){
+        try {
+            Thread.sleep(seconds*1000);
+        }catch (Exception e){
+
+        }
     }
 
     public void navigateTo(String url){

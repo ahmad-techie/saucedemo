@@ -55,3 +55,17 @@ project-root
 ├── logs                            # Stores log files
 ├── pom.xml                         # Maven configuration
 ├── README.md                       # Project documentation
+
+```
+## Installation
+### Prerequisites
+- **Java JDK** (version 8 or later)
+- **Maven** (version 3.6.0 or later)
+- **Browser** (e.g., Chrome, Firefox, Edge, Safari)
+
+### Steps
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/ahmad-techie/saucedemo.git
+   cd saucedemo
+   mvn clean test

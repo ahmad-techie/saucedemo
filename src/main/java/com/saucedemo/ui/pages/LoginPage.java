@@ -28,7 +28,7 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isPasswordMismatchMessagePresent(){
-        return !errorMessage.getText().contains("password do not match");
+        return errorMessage.getText().contains("password do not match");
     }
 
 
