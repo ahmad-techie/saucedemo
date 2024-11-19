@@ -68,16 +68,6 @@ public class DriverManager {
         return new SafariDriver();
     }
 
-//    private static void initializeDriver() {
-//        String browser = ConfigReader.get("browser");
-//        if (browser.equalsIgnoreCase("chrome")) {
-//            driver.set(new ChromeDriver());
-//        } else if (browser.equalsIgnoreCase("firefox")) {
-//            driver.set(new FirefoxDriver());
-//        }
-//        driver.get().manage().window().maximize();
-//    }
-
     public static void quitDriver() {
         driver.get().quit();
         driver.remove();
