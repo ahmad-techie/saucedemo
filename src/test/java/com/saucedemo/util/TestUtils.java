@@ -19,7 +19,7 @@ public class TestUtils {
     public String takeScreenshot(WebDriver driver) throws IOException {
         // Create a timestamped filename
         String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-        String filePath =  "./testOutput/screenshots/screenshot_" + timestamp + ".png";
+        String filePath =  "./test-output/screenshots/regression-tests/screenshot_" + timestamp + ".png";
 
         // Take screenshot and save to file
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);

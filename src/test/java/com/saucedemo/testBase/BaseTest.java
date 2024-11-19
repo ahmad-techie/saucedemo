@@ -7,9 +7,11 @@ import com.saucedemo.utils.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.io.IOException;
 import java.time.Duration;
 
 public class BaseTest extends TestUtils {
@@ -31,8 +33,11 @@ public class BaseTest extends TestUtils {
     }
 
     @AfterMethod
-    public void tearDown() {
+    public void tearDown(ITestResult result) throws IOException {
         logger.debug("********** tearDown method started ***********");
+        if (!result.isSuccess()){
+            takeScreenshot(driver);
+        }
         DriverManager.quitDriver();
         logger.debug("********** tearDown method executed ***********\n");
 
