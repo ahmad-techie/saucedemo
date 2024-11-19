@@ -33,7 +33,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        reporter.getTest().fail("Test Failed: " + result.getThrowable().getMessage());
+        reporter.getTest().fail("Test Failed: " +result.getMethod()+" "+result.getThrowable().getMessage());
     }
 
     @Override

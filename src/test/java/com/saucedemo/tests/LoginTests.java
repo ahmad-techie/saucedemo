@@ -1,8 +1,7 @@
 package com.saucedemo.tests;
 
-import com.saucedemo.config.ConfigReader;
-import com.saucedemo.pages.InventoryPage;
-import com.saucedemo.pages.LoginPage;
+import com.saucedemo.utils.ConfigReader;
+import com.saucedemo.ui.pages.InventoryPage;
 import com.saucedemo.testBase.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;

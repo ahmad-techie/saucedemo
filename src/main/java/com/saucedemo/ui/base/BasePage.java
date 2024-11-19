@@ -1,7 +1,7 @@
-package com.saucedemo.pages;
+package com.saucedemo.ui.base;
 
-import com.saucedemo.config.ConfigReader;
-import com.saucedemo.config.Constants;
+import com.saucedemo.utils.ConfigReader;
+import com.saucedemo.utils.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,15 +13,13 @@ import java.time.Duration;
 
 public class BasePage {
 
-    private final String TIMEOUT = "timeout";
-
     protected WebDriver driver;
     private WebDriverWait wait;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(ConfigReader.get(TIMEOUT))));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(Constants.TIMEOUT));
     }
 
     public void navigateTo(String url){
