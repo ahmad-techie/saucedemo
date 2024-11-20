@@ -1,6 +1,7 @@
 package com.saucedemo.ui.pages;
 
 import com.saucedemo.ui.base.BasePage;
+import com.saucedemo.utils.ConfigReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,21 +14,20 @@ import java.util.stream.Collectors;
 public class InventoryPage extends BasePage {
 
     private final List<String> SORTED_PRICES = List.of("$7.99", "$9.99", "$15.99", "$15.99", "$29.99", "$49.99");
-    private final String product1 = "Sauce Labs Onesie";
-    private final String product2 = "Sauce Labs Fleece Jacket";
+    private final String product1 = ConfigReader.get("product1");
+    private final String product2 = ConfigReader.get("product2");
 
     @FindBy(xpath = "//select[@class='product_sort_container']")
-    WebElement sortDropDown;
+    private WebElement sortDropDown;
     @FindBy(xpath = "//div[@class='pricebar']/div")
-    List<WebElement> prices;
+    private List<WebElement> prices;
     @FindBy(className = "inventory_item_description")
-    List<WebElement> boxes;
+    private List<WebElement> inventory;
     @FindBy(className = "shopping_cart_link")
-    WebElement cartIcon;
-    @FindBy(className = "inventory_item_name")
-    WebElement productTitleInCart;
+    private WebElement cartIcon;
+
     @FindBy(className = "shopping_cart_badge")
-    WebElement cartBadge;
+    private WebElement cartBadge;
 
 
     public InventoryPage(WebDriver driver) {
@@ -48,19 +48,16 @@ public class InventoryPage extends BasePage {
         return SORTED_PRICES.equals(sorted);
     }
 
-    public boolean isProductAddedToCart(){
-        logger.debug("isProductAddedToCart method is called");
-        addProductToCart(product1);
+    public CartPage gotoCart(){
         click(cartIcon);
-        return getText(productTitleInCart).equals(product1);
+        return new CartPage(driver);
     }
 
-    private void addProductToCart(String productName) {
-        for (WebElement productBox : boxes){
-            WebElement productTitle = productBox.findElement(By.className("inventory_item_name"));
-            if (productTitle.getText().equals(productName)){
-                productBox.findElement(By.tagName("button")).click();
-
+    public void addProductToCart(String productToBeAdded) {
+        for (WebElement product : inventory){
+            String productName = product.findElement(By.className("inventory_item_name")).getText();
+            if (productName.equals(productToBeAdded)){
+                click(product.findElement(By.tagName("button")));
             }
         }
     }
@@ -76,6 +73,8 @@ public class InventoryPage extends BasePage {
             throw new RuntimeException("Cart items expected to be "+numberOfItemsInCart+" but was "+actualItemsInCart);
         }
     }
+
+
 
     public void throwExceptionTest(){
         throw new RuntimeException("Testing exception handling");

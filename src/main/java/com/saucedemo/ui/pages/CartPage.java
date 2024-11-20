@@ -1,0 +1,30 @@
+package com.saucedemo.ui.pages;
+
+import com.saucedemo.ui.base.BasePage;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class CartPage extends BasePage {
+
+
+    @FindBy(className = "inventory_item_name")
+    private WebElement productTitleInCart;
+
+    @FindBy(id = "checkout")
+    private WebElement checkoutButton;
+
+
+    public CartPage(WebDriver driver) {
+        super(driver);
+    }
+
+    public boolean isProductInCart(String product){
+        return getText(productTitleInCart).equals(product);
+    }
+
+    public Checkout checkout(){
+        click(checkoutButton);
+        return new Checkout(driver);
+    }
+}

@@ -41,6 +41,10 @@ public abstract class BasePage {
         }
     }
 
+    public String getCurrentUrl(){
+        return driver.getCurrentUrl();
+    }
+
     public void navigateTo(String url){
         driver.get(url);
     }

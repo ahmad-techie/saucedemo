@@ -1,6 +1,9 @@
 package com.saucedemo.tests;
 
 import com.saucedemo.testBase.BaseTest;
+import com.saucedemo.ui.pages.CartPage;
+import com.saucedemo.ui.pages.InventoryPage;
+import com.saucedemo.utils.ConfigReader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -8,22 +11,31 @@ import static org.testng.AssertJUnit.assertTrue;
 
 public class InventoryTest extends BaseTest {
 
+    private InventoryPage inventoryPage;
+
 
     @Test
-    public void verifyProductsAreSortedByPrice(){
-        login();
+    public void verify_products_are_sorted_by_price(){
+        logger.debug("verify_products_are_sorted_by_price method started");
+        inventoryPage = login();
         assertTrue(inventoryPage.areProductsSortedByPriceFromLowToHigh());
+        logger.debug("verify_products_are_sorted_by_price method completed");
     }
 
     @Test
-    public void verifyProductAdditionToCart(){
-        login();
-        assertTrue(inventoryPage.isProductAddedToCart());
+    public void verify_product_added_to_cart(){
+        logger.debug("verify_product_added_to_cart method started");
+        inventoryPage = login();
+        inventoryPage.addProductToCart(product1);
+        CartPage cartPage = inventoryPage.gotoCart();
+        assertTrue(cartPage.isProductInCart(product1));
+        logger.debug("verify_product_added_to_cart method completed");
     }
 
     @Test
-    public void verifyCartBadgeCountDisplayCorrectNumber(){
-        login();
+    public void verify_cart_badge_count_display_correct_number(){
+        logger.debug("verify_cart_badge_count_display_correct_number method started");
+        inventoryPage = login();
         boolean result = false;
         String message = "";
         try {
@@ -32,14 +44,15 @@ public class InventoryTest extends BaseTest {
             message = e.getLocalizedMessage();
         }
         Assert.assertTrue(result, message);
+        logger.debug("verify_cart_badge_count_display_correct_number method completed");
     }
 
-    @Test(expectedExceptions = RuntimeException.class)
-    public void verifyCartBadgeCountFails(){
-        inventoryPage.throwExceptionTest();
-    }
+//    @Test(expectedExceptions = RuntimeException.class)
+//    public void verifyCartBadgeCountFails(){
+//        inventoryPage.throwExceptionTest();
+//    }
 
-    private void login(){
-        loginPage.loginWith(VALID_USERNAME, VALID_PASSWORD);
+    private InventoryPage login(){
+        return loginPage.loginWith(VALID_USERNAME, VALID_PASSWORD);
     }
 }

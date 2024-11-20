@@ -8,6 +8,7 @@
         <classes>
             <class name="com.saucedemo.tests.LoginTests"/>
             <class name="com.saucedemo.tests.InventoryTest"/>
+            <class name="com.saucedemo.tests.CheckoutTest"/>
         </classes>
     </test>
 </suite>
