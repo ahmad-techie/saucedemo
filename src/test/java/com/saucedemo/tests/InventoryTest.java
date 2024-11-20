@@ -4,19 +4,39 @@ import com.saucedemo.testBase.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 public class InventoryTest extends BaseTest {
 
 
     @Test
     public void verifyProductsAreSortedByPrice(){
         login();
-        Assert.assertTrue(inventoryPage.areProductsSortedByPriceFromLowToHigh());
+        assertTrue(inventoryPage.areProductsSortedByPriceFromLowToHigh());
     }
 
     @Test
     public void verifyProductAdditionToCart(){
         login();
-        Assert.assertTrue(inventoryPage.isProductAddedToCart());
+        assertTrue(inventoryPage.isProductAddedToCart());
+    }
+
+    @Test
+    public void verifyCartBadgeCountDisplayCorrectNumber(){
+        login();
+        boolean result = false;
+        String message = "";
+        try {
+            result = inventoryPage.shoppingCartBadgeDisplayCorrectCountOfAddedItems();
+        } catch (RuntimeException e) {
+            message = e.getLocalizedMessage();
+        }
+        Assert.assertTrue(result, message);
+    }
+
+    @Test(expectedExceptions = RuntimeException.class)
+    public void verifyCartBadgeCountFails(){
+        inventoryPage.throwExceptionTest();
     }
 
     private void login(){

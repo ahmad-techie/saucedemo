@@ -14,6 +14,7 @@ public class InventoryPage extends BasePage {
 
     private final List<String> SORTED_PRICES = List.of("$7.99", "$9.99", "$15.99", "$15.99", "$29.99", "$49.99");
     private final String product1 = "Sauce Labs Onesie";
+    private final String product2 = "Sauce Labs Fleece Jacket";
 
     @FindBy(xpath = "//select[@class='product_sort_container']")
     WebElement sortDropDown;
@@ -25,15 +26,17 @@ public class InventoryPage extends BasePage {
     WebElement cartIcon;
     @FindBy(className = "inventory_item_name")
     WebElement productTitleInCart;
+    @FindBy(className = "shopping_cart_badge")
+    WebElement cartBadge;
 
 
-    private final String INVENTORY_PAGE_URL = "https://www.saucedemo.com/inventory.html";
     public InventoryPage(WebDriver driver) {
         super(driver);
     }
 
     public boolean isLoginSuccessful(){
         logger.debug("loginSuccessful method is called");
+        String INVENTORY_PAGE_URL = "https://www.saucedemo.com/inventory.html";
         return driver.getCurrentUrl().equals(INVENTORY_PAGE_URL);
     }
 
@@ -47,14 +50,34 @@ public class InventoryPage extends BasePage {
 
     public boolean isProductAddedToCart(){
         logger.debug("isProductAddedToCart method is called");
+        addProductToCart(product1);
+        click(cartIcon);
+        return getText(productTitleInCart).equals(product1);
+    }
+
+    private void addProductToCart(String productName) {
         for (WebElement productBox : boxes){
             WebElement productTitle = productBox.findElement(By.className("inventory_item_name"));
-            if (productTitle.getText().equals(product1)){
+            if (productTitle.getText().equals(productName)){
                 productBox.findElement(By.tagName("button")).click();
 
             }
         }
-        click(cartIcon);
-        return getText(productTitleInCart).equals(product1);
+    }
+
+    public boolean shoppingCartBadgeDisplayCorrectCountOfAddedItems(){
+        int numberOfItemsInCart = 2;
+        addProductToCart(product1);
+        addProductToCart(product2);
+        int actualItemsInCart = Integer.parseInt(cartBadge.getText());
+        if (actualItemsInCart==numberOfItemsInCart){
+            return true;
+        }else {
+            throw new RuntimeException("Cart items expected to be "+numberOfItemsInCart+" but was "+actualItemsInCart);
+        }
+    }
+
+    public void throwExceptionTest(){
+        throw new RuntimeException("Testing exception handling");
     }
 }
