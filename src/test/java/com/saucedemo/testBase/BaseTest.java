@@ -37,6 +37,7 @@ public class BaseTest extends TestUtils {
         logger.debug("********** setup method started ***********");
         driver = DriverManager.getDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().window().maximize();
         driver.get(Constants.BASE_URL);
         loginPage = new LoginPage(driver);
         logger.debug("********** setup method executed ***********");

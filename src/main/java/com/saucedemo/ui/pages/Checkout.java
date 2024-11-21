@@ -23,6 +23,8 @@ public class Checkout extends BasePage {
     private WebElement finishButton;
     @FindBy(className = "title")
     private WebElement orderConfirmationMessage;
+    @FindBy(css = "h3[data-test='error']")
+    private WebElement errorMessage;
 
     public Checkout(WebDriver driver) {
         super(driver);
@@ -48,7 +50,10 @@ public class Checkout extends BasePage {
     }
 
     public boolean isOrderPlaced(){
-        customWait(3);
         return orderConfirmationMessage.getText().equals("Checkout: Complete!");
+    }
+
+    public boolean isErrorMessagePresent(){
+        return getText(errorMessage).contains("Error");
     }
 }

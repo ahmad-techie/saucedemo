@@ -2,9 +2,11 @@ package com.saucedemo.ui.pages;
 
 import com.saucedemo.ui.base.BasePage;
 import com.saucedemo.utils.ConfigReader;
+import com.saucedemo.utils.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
@@ -25,9 +27,12 @@ public class InventoryPage extends BasePage {
     private List<WebElement> inventory;
     @FindBy(className = "shopping_cart_link")
     private WebElement cartIcon;
-
     @FindBy(className = "shopping_cart_badge")
     private WebElement cartBadge;
+    @FindBy(id = "logout_sidebar_link")
+    private WebElement logoutButton;
+    @FindBy(id = "react-burger-menu-btn")
+    private WebElement hamburgerMenuButton;
 
 
     public InventoryPage(WebDriver driver) {
@@ -74,6 +79,29 @@ public class InventoryPage extends BasePage {
         }
     }
 
+    public boolean productDetailsIsDisplayedWhenClickingOnTheProduct(String product){
+        String partialUrl = "inventory-item.html";
+        for (WebElement p : inventory){
+            WebElement productTitle = p.findElement(By.className("inventory_item_name"));
+            String productName = productTitle.getText();
+            if (productName.equals(product)){
+                Actions actions = new Actions(driver);
+                actions.click(productTitle).build().perform();
+                break;
+            }
+        }
+        return getCurrentUrl().contains(partialUrl);
+    }
+
+    public boolean isLogoutSuccessful(){
+        return getCurrentUrl().equals(ConfigReader.get("baseUrl"));
+    }
+
+
+    public void logout() {
+        click(hamburgerMenuButton);
+        click(logoutButton);
+    }
 
 
     public void throwExceptionTest(){

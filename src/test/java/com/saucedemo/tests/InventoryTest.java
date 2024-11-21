@@ -6,6 +6,7 @@ import com.saucedemo.ui.pages.InventoryPage;
 import com.saucedemo.utils.ConfigReader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -45,6 +46,23 @@ public class InventoryTest extends BaseTest {
         }
         Assert.assertTrue(result, message);
         logger.debug("verify_cart_badge_count_display_correct_number method completed");
+    }
+
+    @Test
+    public void verify_logout_functionality(){
+        logger.debug("verify_logout_functionality method started");
+        inventoryPage = login();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(inventoryPage.isLoginSuccessful());
+        inventoryPage.logout();
+        softAssert.assertTrue(inventoryPage.isLogoutSuccessful());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void verify_product_details_is_displayed(){
+        inventoryPage = login();
+        assertTrue(inventoryPage.productDetailsIsDisplayedWhenClickingOnTheProduct(product2));
     }
 
 //    @Test(expectedExceptions = RuntimeException.class)

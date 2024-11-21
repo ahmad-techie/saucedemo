@@ -14,6 +14,11 @@ public class CartPage extends BasePage {
     @FindBy(id = "checkout")
     private WebElement checkoutButton;
 
+    @FindBy(className = "shopping_cart_badge")
+    private WebElement cartBadge;
+
+    @FindBy(className = "cart_button")
+    private WebElement removeButton;
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -26,5 +31,12 @@ public class CartPage extends BasePage {
     public Checkout checkout(){
         click(checkoutButton);
         return new Checkout(driver);
+    }
+
+    public boolean removeItemFromCart(){
+        click(removeButton);
+        int numberOfItemsInCart = 1;
+        int actualItemsInCart = Integer.parseInt(cartBadge.getText());
+        return actualItemsInCart==numberOfItemsInCart;
     }
 }

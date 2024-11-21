@@ -24,4 +24,11 @@ public class LoginTests extends BaseTest {
         logger.debug("verify_login_with_invalid_credentials completed");
     }
 
+    @Test
+    public void verify_logout_functionality(){
+        logger.debug("verify_logout_functionality method started");
+        InventoryPage inventoryPage = loginPage.loginWith(VALID_USERNAME, VALID_PASSWORD);
+
+    }
+
 }
