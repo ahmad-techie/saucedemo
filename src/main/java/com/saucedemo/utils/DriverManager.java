@@ -13,15 +13,14 @@ import org.openqa.selenium.safari.SafariOptions;
 public class DriverManager {
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    public static WebDriver getDriver() {
+    public static WebDriver getDriver(String browser) {
         if (driver.get() == null) {
-            initializeDriver();
+            initializeDriver(browser);
         }
         return driver.get();
     }
 
-    private static void initializeDriver() {
-        String browser = ConfigReader.get("browser");
+    private static void initializeDriver(String browser) {
         String mode = ConfigReader.get("mode");
         boolean isHeadless = mode.contains("headless");
         if (browser == null) {
