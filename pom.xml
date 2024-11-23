@@ -78,7 +78,7 @@
           <configuration>
             <!-- Specify the path to your testng.xml file -->
             <suiteXmlFiles>
-              <suiteXmlFile>test-runners/testng-suites/testng.xml</suiteXmlFile> <!-- Adjust path if needed -->
+              <suiteXmlFile>src/test/resources/test-runners/testng-suites/cross-browser.xml</suiteXmlFile> <!-- Adjust path if needed -->
             </suiteXmlFiles>
             <testFailureIgnore>true</testFailureIgnore>
           </configuration>
