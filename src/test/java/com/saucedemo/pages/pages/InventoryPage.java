@@ -1,6 +1,7 @@
 package com.saucedemo.pages.pages;
 
 import com.saucedemo.pages.base_page.BasePage;
+import com.saucedemo.util.CSVReader;
 import com.saucedemo.util.DataReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,12 +10,26 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class InventoryPage extends BasePage {
 
-    private final List<String> SORTED_PRICES = List.of("$7.99", "$9.99", "$15.99", "$15.99", "$29.99", "$49.99");
+    private List<String> SORTED_PRICES;
+    {
+        CSVReader csvReader = new CSVReader();
+        String filePath = "src/test/resources/test-data/sorted_products.csv";
+
+        try {
+            csvReader.readCSV(filePath);
+            SORTED_PRICES = csvReader.getPrices();
+
+        } catch (IOException e) {
+            System.out.println("Error reading CSV file: " + e.getMessage());
+        }
+    }
+
     private final String product1 = DataReader.get("product1");
     private final String product2 = DataReader.get("product2");
 

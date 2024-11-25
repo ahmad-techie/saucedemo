@@ -2,7 +2,7 @@ package com.saucedemo.pages.base_page;
 
 import com.google.common.base.Function;
 import com.saucedemo.util.DataReader;
-import com.saucedemo.util.Constants;
+import com.saucedemo.constants.SharedConstants;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
@@ -28,10 +28,11 @@ public abstract class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(SharedConstants.TIMEOUT));
         PageFactory.initElements(driver, this);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(Constants.TIMEOUT));
     }
 
+    //TIP: Is used only for manual debugging
     protected void customWait(int seconds){
         try {
             Thread.sleep(seconds*1000);
@@ -53,17 +54,17 @@ public abstract class BasePage {
     }
 
     public void enterText(WebElement element, String text) {
-        new WebDriverWait(driver, Duration.ofSeconds(Constants.TIMEOUT))
+        new WebDriverWait(driver, Duration.ofSeconds(SharedConstants.TIMEOUT))
                 .until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
     }
 
     public void click(WebElement element) {
-        new WebDriverWait(driver, Duration.ofSeconds(Constants.TIMEOUT))
+        new WebDriverWait(driver, Duration.ofSeconds(SharedConstants.TIMEOUT))
                 .until(ExpectedConditions.elementToBeClickable(element)).click();
     }
 
     public String getText(WebElement element) {
-        return new WebDriverWait(driver, Duration.ofSeconds(Constants.TIMEOUT))
+        return new WebDriverWait(driver, Duration.ofSeconds(SharedConstants.TIMEOUT))
                 .until(ExpectedConditions.visibilityOf(element)).getText();
     }
 

@@ -1,7 +1,6 @@
 package com.saucedemo.tests.base_test;
 
 import com.saucedemo.util.DataReader;
-import com.saucedemo.util.Constants;
 import com.saucedemo.pages.pages.LoginPage;
 import com.saucedemo.util.TestUtils;
 import com.saucedemo.util.BrowserManager;
@@ -19,28 +18,19 @@ import java.time.Duration;
 
 public class BaseTest extends TestUtils {
 
-    protected final String VALID_USERNAME = DataReader.get("username");
-    protected final String VALID_PASSWORD = DataReader.get("password");
-    protected final String INVALID_USERNAME = "fake@123";
-    protected final String INVALID_PASSWORD = "invalid_pass";
-
-    protected final String product1 = DataReader.get("product1");
-    protected final String product2 = DataReader.get("product2");
-
     protected final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     protected WebDriver driver;
-    protected LoginPage loginPage;
+
+    protected int timeoutDuration = Integer.parseInt(DataReader.get("timeout"));
 
     @BeforeMethod
     @Parameters("browser")
     public void setUp(@Optional String browser) {
         logger.debug("********** setup method started ***********");
         driver = BrowserManager.getDriver(browser);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeoutDuration));
         driver.manage().window().maximize();
-        driver.get(Constants.BASE_URL);
-        loginPage = new LoginPage(driver);
         logger.debug("********** setup method executed ***********");
     }
 
@@ -52,6 +42,5 @@ public class BaseTest extends TestUtils {
         }
         BrowserManager.quitDriver();
         logger.debug("********** tearDown method executed ***********");
-
     }
 }

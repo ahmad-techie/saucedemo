@@ -1,25 +1,29 @@
 package com.saucedemo.tests.scripts;
 
+import com.saucedemo.constants.SharedConstants;
+import com.saucedemo.pages.pages.LoginPage;
 import com.saucedemo.tests.base_test.BaseTest;
 import com.saucedemo.pages.pages.CartPage;
 import com.saucedemo.pages.pages.Checkout;
 import com.saucedemo.pages.pages.InventoryPage;
+import com.saucedemo.util.DataReader;
+import com.saucedemo.util.ExcelReader;
+import com.saucedemo.util.TestDataProvider;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
 
 import static org.testng.Assert.assertTrue;
 
-public class CheckoutTest extends BaseTest {
+public class CheckoutTest extends BaseTest implements SharedConstants {
 
-    private final String firstName = "John";
-    private final String lastName = "Doe";
-    private final String zipCode = "12345";
+    private LoginPage loginPage;
 
-    private InventoryPage inventoryPage;
-
-    @Test(priority = 0)
-    public void verify_order_is_placed(){
+    @Test(dataProvider = "customer_data", dataProviderClass = TestDataProvider.class)
+    public void verify_order_is_placed(String firstName, String lastName, String zipCode){
         CartPage cartPage = goToCartPage();
-        cartPage.isProductInCart(product1);
+        cartPage.isProductInCart(PRODUCT_ONE);
         Checkout checkout = cartPage.checkout();
         checkout.fillOutInformation(firstName, lastName, zipCode);
         checkout.clickContinue();
@@ -36,12 +40,14 @@ public class CheckoutTest extends BaseTest {
         assertTrue(checkout.isErrorMessagePresent());
     }
 
+
     private CartPage goToCartPage() {
+        loginPage = new LoginPage(driver);
+        loginPage.navigateTo(BASE_URL);
         InventoryPage inventoryPage = loginPage.loginWith(VALID_USERNAME, VALID_PASSWORD);
-        inventoryPage.addProductToCart(product1);
+        inventoryPage.addProductToCart(PRODUCT_TWO);
         CartPage cartPage = inventoryPage.gotoCart();
         return cartPage;
     }
-
 
 }
