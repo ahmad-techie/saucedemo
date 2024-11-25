@@ -1,6 +1,7 @@
 package com.saucedemo.tests.base_test;
 
-import com.saucedemo.util.DataReader;
+import com.saucedemo.constants.SharedConstants;
+import com.saucedemo.util.PropertiesReader;
 import com.saucedemo.util.TestUtils;
 import com.saucedemo.util.BrowserManager;
 import org.openqa.selenium.WebDriver;
@@ -15,20 +16,18 @@ import org.testng.annotations.Parameters;
 import java.io.IOException;
 import java.time.Duration;
 
-public class BaseTest extends TestUtils {
+public class BaseTest extends TestUtils implements SharedConstants {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     protected WebDriver driver;
-
-    protected int timeoutDuration = Integer.parseInt(DataReader.get("timeout"));
 
     @BeforeMethod
     @Parameters("browser")
     public void setUp(@Optional String browser) {
         logger.debug("********** setup method started ***********");
         driver = BrowserManager.getDriver(browser);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeoutDuration));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TIMEOUT_DURATION));
         driver.manage().window().maximize();
         logger.debug("********** setup method executed ***********");
     }

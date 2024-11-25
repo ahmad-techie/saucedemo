@@ -5,16 +5,11 @@ import com.saucedemo.pages.pages.LoginPage;
 import com.saucedemo.tests.base_test.BaseTest;
 import com.saucedemo.pages.pages.CartPage;
 import com.saucedemo.pages.pages.InventoryPage;
-import com.saucedemo.util.DataReader;
+import com.saucedemo.util.PropertiesReader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CartPageTest extends BaseTest implements SharedConstants {
-
-    private final String VALID_USERNAME = DataReader.get("valid_username");
-    private final String VALID_PASSWORD = DataReader.get("valid_password");
-    private final String PRODUCT_ONE = DataReader.get("product1");
-    private final String PRODUCT_TWO = DataReader.get("product2");
 
     private LoginPage loginPage;
 

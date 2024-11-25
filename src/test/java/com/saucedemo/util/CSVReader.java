@@ -1,34 +1,31 @@
 package com.saucedemo.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.util.*;
 
 public class CSVReader {
 
-    private final List<List<String>> csvData = new ArrayList<>();
+    private static final Logger logger = LoggerFactory.getLogger("CSV Reader");
 
-    // Method to read the entire CSV file
-    public void readCSV(String filePath) throws IOException {
+    public static List<String> readCSV(String filePath){
+        List<List<String>> csvData = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] values = line.split(","); // Split the line by commas
-                csvData.add(Arrays.asList(values)); // Add as a list to csvData
+                String[] values = line.split(",");
+                csvData.add(Arrays.asList(values));
             }
+        }catch (IOException e){
+
         }
-    }
 
-    // Method to return all rows
-    public List<List<String>> getAllRows() {
-        return csvData;
-    }
-
-    // Method to return a list of prices
-    public List<String> getPrices() {
         List<String> prices = new ArrayList<>();
         // Start from row index 1 to skip the header row
         for (int i = 1; i < csvData.size(); i++) {
-            prices.add(csvData.get(i).get(1)); // Add the Price column (index 1)
+            prices.add(csvData.get(i).get(1));
         }
         return prices;
     }

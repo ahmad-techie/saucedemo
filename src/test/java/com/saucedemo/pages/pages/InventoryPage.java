@@ -1,37 +1,22 @@
 package com.saucedemo.pages.pages;
 
+import com.saucedemo.constants.SharedConstants;
 import com.saucedemo.pages.base_page.BasePage;
-import com.saucedemo.util.CSVReader;
-import com.saucedemo.util.DataReader;
+import com.saucedemo.util.PropertiesReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class InventoryPage extends BasePage {
+public class InventoryPage extends BasePage implements SharedConstants {
 
-    private List<String> SORTED_PRICES;
-    {
-        CSVReader csvReader = new CSVReader();
-        String filePath = "src/test/resources/test-data/sorted_products.csv";
-
-        try {
-            csvReader.readCSV(filePath);
-            SORTED_PRICES = csvReader.getPrices();
-
-        } catch (IOException e) {
-            System.out.println("Error reading CSV file: " + e.getMessage());
-        }
+    public InventoryPage(WebDriver driver) {
+        super(driver);
     }
-
-    private final String product1 = DataReader.get("product1");
-    private final String product2 = DataReader.get("product2");
 
     @FindBy(xpath = "//select[@class='product_sort_container']")
     private WebElement sortDropDown;
@@ -48,21 +33,15 @@ public class InventoryPage extends BasePage {
     @FindBy(id = "react-burger-menu-btn")
     private WebElement hamburgerMenuButton;
 
-
-    public InventoryPage(WebDriver driver) {
-        super(driver);
-    }
-
     public boolean isLoginSuccessful(){
         logger.debug("loginSuccessful method is called");
-        String INVENTORY_PAGE_URL = "https://www.saucedemo.com/inventory.html";
         return driver.getCurrentUrl().equals(INVENTORY_PAGE_URL);
     }
 
     public boolean areProductsSortedByPriceFromLowToHigh(){
         logger.debug("areProductsSortedByPriceFromLowToHigh method is called");
-        Select select = new Select(sortDropDown);
-        select.selectByValue("lohi");
+        selectDropDown(sortDropDown, "lohi");
+
         List<String> sorted = prices.stream().map(element -> element.getText()).collect(Collectors.toList());
         return SORTED_PRICES.equals(sorted);
     }
@@ -83,8 +62,8 @@ public class InventoryPage extends BasePage {
 
     public boolean shoppingCartBadgeDisplayCorrectCountOfAddedItems(){
         int numberOfItemsInCart = 2;
-        addProductToCart(product1);
-        addProductToCart(product2);
+        addProductToCart(PRODUCT_ONE);
+        addProductToCart(PRODUCT_TWO);
         int actualItemsInCart = Integer.parseInt(cartBadge.getText());
         if (actualItemsInCart==numberOfItemsInCart){
             return true;
@@ -108,7 +87,7 @@ public class InventoryPage extends BasePage {
     }
 
     public boolean isLogoutSuccessful(){
-        return getCurrentUrl().equals(DataReader.get("baseUrl"));
+        return getCurrentUrl().equals(BASE_URL);
     }
 
 
@@ -117,8 +96,4 @@ public class InventoryPage extends BasePage {
         click(logoutButton);
     }
 
-
-    public void throwExceptionTest(){
-        throw new RuntimeException("Testing exception handling");
-    }
 }

@@ -1,6 +1,7 @@
 package com.saucedemo.util;
 
 import com.saucedemo.constants.Browsers;
+import com.saucedemo.constants.SharedConstants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -10,7 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 
-public class BrowserManager {
+public class BrowserManager implements SharedConstants {
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public static WebDriver getDriver(String browser) {
@@ -21,12 +22,15 @@ public class BrowserManager {
     }
 
     private static void initializeDriver(String browser) {
-        String mode = DataReader.get("mode");
-        boolean isHeadless = mode.contains("headless");
+
         if (browser == null || browser.isBlank() || browser.isEmpty()) {
-            browser = System.getProperty("browser") != null ? System.getProperty("browser") : DataReader.get("browser");
+            String browserName = System.getProperty("browser");
+            browser = browserName != null ? browserName : BROWSER;
             if (browser==null) browser = "chrome";
         }
+
+        Boolean headless = Boolean.parseBoolean(System.getProperty("headless"));
+        boolean isHeadless = headless != null ? headless : HEADLESS_MODE;
         switch (browser) {
             case Browsers.FIREFOX:
                 driver.set(createFirefoxDriver(isHeadless));

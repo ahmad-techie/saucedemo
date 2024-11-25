@@ -1,7 +1,7 @@
 package com.saucedemo.pages.base_page;
 
 import com.google.common.base.Function;
-import com.saucedemo.util.DataReader;
+import com.saucedemo.util.PropertiesReader;
 import com.saucedemo.constants.SharedConstants;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -18,27 +18,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public abstract class BasePage {
+public abstract class BasePage implements SharedConstants{
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     protected WebDriver driver;
     private final WebDriverWait wait;
-    private final boolean isDemoMode = Boolean.parseBoolean(DataReader.get("demoMode"));
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(SharedConstants.TIMEOUT));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_DURATION));
         PageFactory.initElements(driver, this);
-    }
-
-    //TIP: Is used only for manual debugging
-    protected void customWait(int seconds){
-        try {
-            Thread.sleep(seconds* 1000L);
-        }catch (Exception e){
-
-        }
     }
 
     public String getCurrentUrl(){
@@ -54,17 +44,17 @@ public abstract class BasePage {
     }
 
     public void enterText(WebElement element, String text) {
-        new WebDriverWait(driver, Duration.ofSeconds(SharedConstants.TIMEOUT))
+        new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_DURATION))
                 .until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
     }
 
     public void click(WebElement element) {
-        new WebDriverWait(driver, Duration.ofSeconds(SharedConstants.TIMEOUT))
+        new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_DURATION))
                 .until(ExpectedConditions.elementToBeClickable(element)).click();
     }
 
     public String getText(WebElement element) {
-        return new WebDriverWait(driver, Duration.ofSeconds(SharedConstants.TIMEOUT))
+        return new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_DURATION))
                 .until(ExpectedConditions.visibilityOf(element)).getText();
     }
 
@@ -109,12 +99,11 @@ public abstract class BasePage {
         }
     }
 
-    public void selectDropDownByAttributeValue(By locator, String attributeValue) {
+    public void selectDropDown(WebElement select, String value) {
         try {
-            WebElement element = driver.findElement(locator);
-            highlightElement(element);
-            Select dropDown = new Select(element);
-            dropDown.selectByValue(attributeValue);
+            highlightElement(select);
+            Select dropDown = new Select(select);
+            dropDown.selectByValue(value);
         } catch (Exception e) {
             logger.error("Error: ", e);
         }
@@ -157,7 +146,7 @@ public abstract class BasePage {
 
     public void highlightElement(WebElement element) {
         try {
-            if (isDemoMode) {
+            if (DEMO_MODE) {
                 for (int i = 0; i < 4; i++) {
                     WrapsDriver wrappedElement = (WrapsDriver) element;
                     JavascriptExecutor js = (JavascriptExecutor) wrappedElement.getWrappedDriver();
@@ -311,6 +300,15 @@ public abstract class BasePage {
             alert.accept();
         } catch (Exception e) {
             logger.error("Error: ", e);
+        }
+    }
+
+    //TIP: Is used only for manual debugging
+    protected void customWait(int seconds){
+        try {
+            Thread.sleep(seconds* 1000L);
+        }catch (Exception e){
+
         }
     }
 }

@@ -1,20 +1,29 @@
 package com.saucedemo.util;
 
+import com.saucedemo.constants.SharedConstants;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class ExcelReader {
+public class ExcelReader extends Logger implements SharedConstants {
 
-    private final Workbook workbook;
+    private static Workbook workbook = null;
 
-    public ExcelReader(String filePath) throws IOException {
-        FileInputStream fis = new FileInputStream(filePath);
-        this.workbook = new XSSFWorkbook(fis);
+    static {
+        try {
+            FileInputStream fis = new FileInputStream(EXCEL_FILE_PATH);
+            workbook = new XSSFWorkbook(fis);
+        } catch (FileNotFoundException e) {
+            logger.error(Arrays.toString(e.getStackTrace()));
+        } catch (IOException e) {
+            logger.error(Arrays.toString(e.getStackTrace()));
+        }
     }
 
     public Object[][] readData(String sheetName) {

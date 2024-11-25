@@ -17,12 +17,7 @@ public class TestDataProvider implements SharedConstants {
 
         String sheetName = "customers";
 
-        try {
-            ExcelReader reader = new ExcelReader(EXCEL_FILE_PATH);
-            return reader.readData(sheetName);
-        } catch (IOException e) {
-            logger.error(Arrays.toString(e.getStackTrace()));
-            return new Object[0][];
-        }
+        ExcelReader reader = new ExcelReader();
+        return reader.readData(sheetName);
     }
 }
