@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="CrossBrowserSuite" parallel="tests" thread-count="2">
+    <listeners>
+        <listener class-name="com.saucedemo.util.TestListener"/>
+    </listeners>
+    <test verbose="2" preserve-order="true" name="C:/Users/Masoud/Desktop/QA_Automation/Selenium/Projects/saucedemo">
+        <classes>
+            <class name="com.saucedemo.tests.LoginTests">
+                <methods>
+                    <include name="verify_login_with_valid_credentials"/>
+                </methods>
+            </class>
+            <class name="com.saucedemo.tests.InventoryTest">
+                <methods>
+                    <include name="verify_logout_functionality"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
