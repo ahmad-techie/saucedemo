@@ -1,6 +1,7 @@
-package com.saucedemo.ui.pages;
+package com.saucedemo.pages.pages;
 
-import com.saucedemo.utils.DataReader;
+import com.saucedemo.pages.base_page.BasePage;
+import com.saucedemo.util.DataReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

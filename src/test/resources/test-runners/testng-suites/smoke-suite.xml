@@ -6,12 +6,12 @@
     </listeners>
     <test verbose="2" preserve-order="true" name="C:/Users/Masoud/Desktop/QA_Automation/Selenium/Projects/saucedemo">
         <classes>
-            <class name="com.saucedemo.tests.LoginTests">
+            <class name="com.saucedemo.tests.scripts.LoginTests">
                 <methods>
                     <include name="verify_login_with_valid_credentials"/>
                 </methods>
             </class>
-            <class name="com.saucedemo.tests.InventoryTest">
+            <class name="com.saucedemo.tests.scripts.InventoryTest">
                 <methods>
                     <include name="verify_logout_functionality"/>
                 </methods>

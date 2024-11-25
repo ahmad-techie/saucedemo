@@ -1,4 +1,4 @@
-package com.saucedemo.utils;
+package com.saucedemo.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,7 +10,7 @@ public class DataReader {
     static {
         properties = new Properties();
         try {
-            FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
+            FileInputStream fis = new FileInputStream("./src/test/resources/properties/application.properties");
             properties.load(fis);
         } catch (IOException e) {
             e.printStackTrace();

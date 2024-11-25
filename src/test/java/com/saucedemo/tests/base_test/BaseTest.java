@@ -1,8 +1,8 @@
-package com.saucedemo.testBase;
+package com.saucedemo.tests.base_test;
 
-import com.saucedemo.utils.DataReader;
-import com.saucedemo.utils.Constants;
-import com.saucedemo.ui.pages.LoginPage;
+import com.saucedemo.util.DataReader;
+import com.saucedemo.util.Constants;
+import com.saucedemo.pages.pages.LoginPage;
 import com.saucedemo.util.TestUtils;
 import com.saucedemo.util.BrowserManager;
 import org.openqa.selenium.WebDriver;

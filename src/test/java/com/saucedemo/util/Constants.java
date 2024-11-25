@@ -1,4 +1,4 @@
-package com.saucedemo.utils;
+package com.saucedemo.util;
 
 public class Constants {
     public static final String BASE_URL = DataReader.get("baseUrl");

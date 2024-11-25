@@ -1,4 +1,4 @@
-package com.saucedemo.utils;
+package com.saucedemo.util;
 
 public class Browsers {
     public static final String CHROME = "chrome";

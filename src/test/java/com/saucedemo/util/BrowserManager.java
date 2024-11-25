@@ -1,7 +1,5 @@
 package com.saucedemo.util;
 
-import com.saucedemo.utils.Browsers;
-import com.saucedemo.utils.DataReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

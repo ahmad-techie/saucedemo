@@ -1,8 +1,8 @@
-package com.saucedemo.tests;
+package com.saucedemo.tests.scripts;
 
-import com.saucedemo.testBase.BaseTest;
-import com.saucedemo.ui.pages.CartPage;
-import com.saucedemo.ui.pages.InventoryPage;
+import com.saucedemo.tests.base_test.BaseTest;
+import com.saucedemo.pages.pages.CartPage;
+import com.saucedemo.pages.pages.InventoryPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

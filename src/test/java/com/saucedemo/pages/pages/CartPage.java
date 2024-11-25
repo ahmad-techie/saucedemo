@@ -1,5 +1,6 @@
-package com.saucedemo.ui.pages;
+package com.saucedemo.pages.pages;
 
+import com.saucedemo.pages.base_page.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

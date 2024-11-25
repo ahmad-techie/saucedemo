@@ -4,12 +4,12 @@
     <listeners>
         <listener class-name="com.saucedemo.util.TestListener"/>
     </listeners>
-    <test verbose="2" preserve-order="true" name="C:/Users/Masoud/Desktop/QA_Automation/Selenium/Projects/saucedemo">
+    <test verbose="2" preserve-order="true" name="ui-core-functionalities-test">
         <classes>
-            <class name="com.saucedemo.tests.LoginTests"/>
-            <class name="com.saucedemo.tests.InventoryTest"/>
-            <class name="com.saucedemo.tests.CheckoutTest"/>
-            <class name="com.saucedemo.tests.CartPageTest"/>
+            <class name="com.saucedemo.tests.scripts.LoginTests"/>
+            <class name="com.saucedemo.tests.scripts.InventoryTest"/>
+            <class name="com.saucedemo.tests.scripts.CheckoutTest"/>
+            <class name="com.saucedemo.tests.scripts.CartPageTest"/>
         </classes>
     </test>
 </suite>

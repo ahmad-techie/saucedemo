@@ -1,8 +1,8 @@
-package com.saucedemo.ui.pages;
+package com.saucedemo.pages.base_page;
 
 import com.google.common.base.Function;
-import com.saucedemo.utils.DataReader;
-import com.saucedemo.utils.Constants;
+import com.saucedemo.util.DataReader;
+import com.saucedemo.util.Constants;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
