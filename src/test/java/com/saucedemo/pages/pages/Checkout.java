@@ -1,13 +1,12 @@
 package com.saucedemo.pages.pages;
 
+import com.saucedemo.constants.SharedConstants;
 import com.saucedemo.pages.base_page.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class Checkout extends BasePage {
-
-    private final String URL = "https://www.saucedemo.com/checkout-step-two.html";
+public class Checkout extends BasePage implements SharedConstants {
 
     @FindBy(id = "first-name")
     private WebElement firstNameField;
@@ -34,7 +33,7 @@ public class Checkout extends BasePage {
         enterText(firstNameField, firstName);
         enterText(lastNameField, lastName);
         enterText(zipCodeField, zipCode);
-        return getCurrentUrl().equals(URL);
+        return getCurrentUrl().equals(CHECKOUT_URL);
     }
 
     public void clickContinue(){

@@ -1,11 +1,17 @@
 package com.saucedemo.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 public class DataReader {
-    private static Properties properties;
+
+    private static Logger logger = LoggerFactory.getLogger("Data Reader");
+
+    private static final Properties properties;
 
     static {
         properties = new Properties();
@@ -13,7 +19,7 @@ public class DataReader {
             FileInputStream fis = new FileInputStream("./src/test/resources/properties/application.properties");
             properties.load(fis);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getStackTrace().toString());
         }
     }
 

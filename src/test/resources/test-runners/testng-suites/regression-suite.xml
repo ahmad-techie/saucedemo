@@ -4,7 +4,7 @@
     <listeners>
         <listener class-name="com.saucedemo.util.TestListener"/>
     </listeners>
-    <test verbose="2" preserve-order="true" name="ui-core-functionalities-test">
+    <test verbose="2" name="ui-core-functionalities-test">
         <classes>
             <class name="com.saucedemo.tests.scripts.LoginTests"/>
             <class name="com.saucedemo.tests.scripts.InventoryTest"/>

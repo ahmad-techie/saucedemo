@@ -5,7 +5,7 @@ import java.util.*;
 
 public class CSVReader {
 
-    private List<List<String>> csvData = new ArrayList<>();
+    private final List<List<String>> csvData = new ArrayList<>();
 
     // Method to read the entire CSV file
     public void readCSV(String filePath) throws IOException {
@@ -32,5 +32,5 @@ public class CSVReader {
         }
         return prices;
     }
-    
+
 }

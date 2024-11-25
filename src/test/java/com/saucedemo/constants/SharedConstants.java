@@ -5,6 +5,8 @@ import com.saucedemo.util.DataReader;
 public interface SharedConstants {
     String BASE_URL = DataReader.get("baseUrl");
 
+    String CHECKOUT_URL = DataReader.get("checkoutUrl");
+
     String VALID_USERNAME = DataReader.get("valid_username");
     String VALID_PASSWORD = DataReader.get("valid_password");
     String INVALID_USERNAME = DataReader.get("invalid_username");

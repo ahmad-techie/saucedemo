@@ -4,7 +4,6 @@ import com.saucedemo.constants.SharedConstants;
 import com.saucedemo.pages.pages.InventoryPage;
 import com.saucedemo.pages.pages.LoginPage;
 import com.saucedemo.tests.base_test.BaseTest;
-import com.saucedemo.util.DataReader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
