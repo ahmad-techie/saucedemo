@@ -1,7 +1,7 @@
 package com.saucedemo.ui.pages;
 
 import com.google.common.base.Function;
-import com.saucedemo.utils.ConfigReader;
+import com.saucedemo.utils.DataReader;
 import com.saucedemo.utils.Constants;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -24,7 +24,7 @@ public abstract class BasePage {
 
     protected WebDriver driver;
     private final WebDriverWait wait;
-    private final boolean isDemoMode = Boolean.parseBoolean(ConfigReader.get("demoMode"));
+    private final boolean isDemoMode = Boolean.parseBoolean(DataReader.get("demoMode"));
 
     public BasePage(WebDriver driver) {
         this.driver = driver;

@@ -1,6 +1,6 @@
 package com.saucedemo.ui.pages;
 
-import com.saucedemo.utils.ConfigReader;
+import com.saucedemo.utils.DataReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 public class InventoryPage extends BasePage {
 
     private final List<String> SORTED_PRICES = List.of("$7.99", "$9.99", "$15.99", "$15.99", "$29.99", "$49.99");
-    private final String product1 = ConfigReader.get("product1");
-    private final String product2 = ConfigReader.get("product2");
+    private final String product1 = DataReader.get("product1");
+    private final String product2 = DataReader.get("product2");
 
     @FindBy(xpath = "//select[@class='product_sort_container']")
     private WebElement sortDropDown;
@@ -92,7 +92,7 @@ public class InventoryPage extends BasePage {
     }
 
     public boolean isLogoutSuccessful(){
-        return getCurrentUrl().equals(ConfigReader.get("baseUrl"));
+        return getCurrentUrl().equals(DataReader.get("baseUrl"));
     }
 
 

@@ -1,6 +1,5 @@
 package com.saucedemo.tests;
 
-import com.saucedemo.utils.ConfigReader;
 import com.saucedemo.ui.pages.InventoryPage;
 import com.saucedemo.testBase.BaseTest;
 import org.testng.Assert;

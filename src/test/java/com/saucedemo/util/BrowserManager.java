@@ -1,7 +1,7 @@
 package com.saucedemo.util;
 
 import com.saucedemo.utils.Browsers;
-import com.saucedemo.utils.ConfigReader;
+import com.saucedemo.utils.DataReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -22,10 +22,10 @@ public class BrowserManager {
     }
 
     private static void initializeDriver(String browser) {
-        String mode = ConfigReader.get("mode");
+        String mode = DataReader.get("mode");
         boolean isHeadless = mode.contains("headless");
         if (browser == null || browser.isBlank() || browser.isEmpty()) {
-            browser = System.getProperty("browser") != null ? System.getProperty("browser") : ConfigReader.get("browser");
+            browser = System.getProperty("browser") != null ? System.getProperty("browser") : DataReader.get("browser");
             if (browser==null) browser = "chrome";
         }
         if (browser.equals(Browsers.FIREFOX)) {

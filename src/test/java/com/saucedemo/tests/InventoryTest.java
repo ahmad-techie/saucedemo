@@ -3,7 +3,6 @@ package com.saucedemo.tests;
 import com.saucedemo.testBase.BaseTest;
 import com.saucedemo.ui.pages.CartPage;
 import com.saucedemo.ui.pages.InventoryPage;
-import com.saucedemo.utils.ConfigReader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;

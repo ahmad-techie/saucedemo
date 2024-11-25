@@ -1,6 +1,6 @@
 package com.saucedemo.testBase;
 
-import com.saucedemo.utils.ConfigReader;
+import com.saucedemo.utils.DataReader;
 import com.saucedemo.utils.Constants;
 import com.saucedemo.ui.pages.LoginPage;
 import com.saucedemo.util.TestUtils;
@@ -19,13 +19,13 @@ import java.time.Duration;
 
 public class BaseTest extends TestUtils {
 
-    protected final String VALID_USERNAME = ConfigReader.get("username");
-    protected final String VALID_PASSWORD = ConfigReader.get("password");
+    protected final String VALID_USERNAME = DataReader.get("username");
+    protected final String VALID_PASSWORD = DataReader.get("password");
     protected final String INVALID_USERNAME = "fake@123";
     protected final String INVALID_PASSWORD = "invalid_pass";
 
-    protected final String product1 = ConfigReader.get("product1");
-    protected final String product2 = ConfigReader.get("product2");
+    protected final String product1 = DataReader.get("product1");
+    protected final String product2 = DataReader.get("product2");
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
