@@ -11,7 +11,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class BrowserManager {
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public static WebDriver getDriver(String browser) {
         if (driver.get() == null) {
@@ -27,16 +27,21 @@ public class BrowserManager {
             browser = System.getProperty("browser") != null ? System.getProperty("browser") : DataReader.get("browser");
             if (browser==null) browser = "chrome";
         }
-        if (browser.equals(Browsers.FIREFOX)) {
-            driver.set(createFirefoxDriver(isHeadless));
-        } else if (browser.equals(Browsers.EDGE)) {
-            driver.set(createEdgeDriver(isHeadless));
-        } else if (browser.equals(Browsers.CHROME)) {
-            driver.set(createChromeDriver(isHeadless));
-        } else if (browser.equals(Browsers.SAFARI)) {
-            driver.set(createSafariDriver());
-        }else {
-            throw new IllegalArgumentException("Unsupported browser type: " + browser);
+        switch (browser) {
+            case Browsers.FIREFOX:
+                driver.set(createFirefoxDriver(isHeadless));
+                break;
+            case Browsers.EDGE:
+                driver.set(createEdgeDriver(isHeadless));
+                break;
+            case Browsers.CHROME:
+                driver.set(createChromeDriver(isHeadless));
+                break;
+            case Browsers.SAFARI:
+                driver.set(createSafariDriver());
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported browser type: " + browser);
         }
     }
 

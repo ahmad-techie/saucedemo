@@ -6,13 +6,8 @@ import com.saucedemo.tests.base_test.BaseTest;
 import com.saucedemo.pages.pages.CartPage;
 import com.saucedemo.pages.pages.Checkout;
 import com.saucedemo.pages.pages.InventoryPage;
-import com.saucedemo.util.DataReader;
-import com.saucedemo.util.ExcelReader;
 import com.saucedemo.util.TestDataProvider;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.io.IOException;
 
 import static org.testng.Assert.assertTrue;
 
@@ -46,8 +41,7 @@ public class CheckoutTest extends BaseTest implements SharedConstants {
         loginPage.navigateTo(BASE_URL);
         InventoryPage inventoryPage = loginPage.loginWith(VALID_USERNAME, VALID_PASSWORD);
         inventoryPage.addProductToCart(PRODUCT_TWO);
-        CartPage cartPage = inventoryPage.gotoCart();
-        return cartPage;
+        return inventoryPage.gotoCart();
     }
 
 }

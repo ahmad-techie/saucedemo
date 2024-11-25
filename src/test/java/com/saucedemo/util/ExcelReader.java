@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ExcelReader {
 
-    private Workbook workbook;
+    private final Workbook workbook;
 
     public ExcelReader(String filePath) throws IOException {
         FileInputStream fis = new FileInputStream(filePath);

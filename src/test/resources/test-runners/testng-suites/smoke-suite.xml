@@ -4,7 +4,7 @@
     <listeners>
         <listener class-name="com.saucedemo.util.TestListener"/>
     </listeners>
-    <test verbose="2" preserve-order="true" name="C:/Users/Masoud/Desktop/QA_Automation/Selenium/Projects/saucedemo">
+    <test verbose="2" name="C:/Users/Masoud/Desktop/QA_Automation/Selenium/Projects/saucedemo">
         <classes>
             <class name="com.saucedemo.tests.scripts.LoginTests">
                 <methods>

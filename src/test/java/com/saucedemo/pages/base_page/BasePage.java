@@ -35,7 +35,7 @@ public abstract class BasePage {
     //TIP: Is used only for manual debugging
     protected void customWait(int seconds){
         try {
-            Thread.sleep(seconds*1000);
+            Thread.sleep(seconds* 1000L);
         }catch (Exception e){
 
         }
@@ -157,7 +157,7 @@ public abstract class BasePage {
 
     public void highlightElement(WebElement element) {
         try {
-            if (isDemoMode == true) {
+            if (isDemoMode) {
                 for (int i = 0; i < 4; i++) {
                     WrapsDriver wrappedElement = (WrapsDriver) element;
                     JavascriptExecutor js = (JavascriptExecutor) wrappedElement.getWrappedDriver();
