@@ -1,18 +1,17 @@
 package com.saucedemo.testBase;
 
-import com.saucedemo.ui.pages.CartPage;
-import com.saucedemo.ui.pages.InventoryPage;
 import com.saucedemo.utils.ConfigReader;
 import com.saucedemo.utils.Constants;
 import com.saucedemo.ui.pages.LoginPage;
 import com.saucedemo.util.TestUtils;
-import com.saucedemo.utils.DriverManager;
+import com.saucedemo.util.BrowserManager;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import java.io.IOException;
@@ -35,15 +34,14 @@ public class BaseTest extends TestUtils {
 
     @BeforeMethod
     @Parameters("browser")
-    public void setUp(String browser) {
+    public void setUp(@Optional String browser) {
         logger.debug("********** setup method started ***********");
-        driver = DriverManager.getDriver(browser);
+        driver = BrowserManager.getDriver(browser);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().window().maximize();
         driver.get(Constants.BASE_URL);
         loginPage = new LoginPage(driver);
         logger.debug("********** setup method executed ***********");
-
     }
 
     @AfterMethod
@@ -52,7 +50,7 @@ public class BaseTest extends TestUtils {
         if (!result.isSuccess()){
             takeScreenshot(driver);
         }
-        DriverManager.quitDriver();
+        BrowserManager.quitDriver();
         logger.debug("********** tearDown method executed ***********");
 
     }

@@ -1,4 +1,4 @@
-package com.saucedemo.ui.base;
+package com.saucedemo.ui.pages;
 
 import com.google.common.base.Function;
 import com.saucedemo.utils.ConfigReader;
@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 public abstract class BasePage {
 

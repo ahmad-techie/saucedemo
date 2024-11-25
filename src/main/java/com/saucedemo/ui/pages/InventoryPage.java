@@ -1,8 +1,6 @@
 package com.saucedemo.ui.pages;
 
-import com.saucedemo.ui.base.BasePage;
 import com.saucedemo.utils.ConfigReader;
-import com.saucedemo.utils.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

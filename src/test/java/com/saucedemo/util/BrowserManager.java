@@ -1,5 +1,7 @@
-package com.saucedemo.utils;
+package com.saucedemo.util;
 
+import com.saucedemo.utils.Browsers;
+import com.saucedemo.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,9 +10,8 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.safari.SafariOptions;
 
-public class DriverManager {
+public class BrowserManager {
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public static WebDriver getDriver(String browser) {
@@ -23,8 +24,9 @@ public class DriverManager {
     private static void initializeDriver(String browser) {
         String mode = ConfigReader.get("mode");
         boolean isHeadless = mode.contains("headless");
-        if (browser == null) {
-            browser = "chrome"; // Defaults to Chrome browser if browser is not provided in the config file
+        if (browser == null || browser.isBlank() || browser.isEmpty()) {
+            browser = System.getProperty("browser") != null ? System.getProperty("browser") : ConfigReader.get("browser");
+            if (browser==null) browser = "chrome";
         }
         if (browser.equals(Browsers.FIREFOX)) {
             driver.set(createFirefoxDriver(isHeadless));
